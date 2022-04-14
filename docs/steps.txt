@@ -9,6 +9,7 @@ Steps:
     - Creación de Repo y de branching
     - Pipelines de github para test
     - Integracion de DB y Redis
+    - Update readme.md
 
 
 
