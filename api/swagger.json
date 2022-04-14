@@ -1,0 +1,75 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "Mutant API <a href='/api-docs.json'>swagger.json</a>",
+        "version": "1.0.6",
+        "title": "Mutant API",
+        "contact": {
+            "email": "julito0208@gmail.com"
+        }
+    },
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Mutants",
+            "description": "Operations about mutants"
+        }
+    ],
+    "paths": {
+        "/mutant": {
+            "post": {
+                "tags": [
+                    "Mutants"
+                ],
+                "summary": "Check if a matrix dna is for a mutant or a human.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "DNAMatrix",
+                        "description": "DNA Matrix",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/DNAMatrix"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The DNA is for a mutant"
+                    },
+                    "403": {
+                        "description": "The DNA is not for a mutant (Forbidden)"
+                    },
+                    "400": {
+                        "description": "Invalid Request"
+                    }
+                }
+            }
+        },
+        "/stats": {
+            "get": {
+                "tags": [
+                    "Mutants"
+                ],
+                "summary": "Get dna checks stats",
+                "responses": {
+                    "200": {
+                        "description": "The DNA is for a mutant"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "DNAMatrix": {
+            "type": "object",
+            "properties": {
+                "dna": {
+                    "type": "Array",
+                    "description": "The DNA Matrix. Array (NxN) of strings containing any letter of ATCG.",
+                    "example": "[\"ATGCGA\",\"CAGTGC\",\"TTATGT\",\"AGAAGG\",\"CCCCTA\",\"TCACTG\"]"
+                }
+            }
+        }
+    }
+}

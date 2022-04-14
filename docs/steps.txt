@@ -1,0 +1,14 @@
+Steps:
+    - Construcción Algoritmo para definir si es un mutante
+    - Creación de stack (docker, api, etc)
+    - Arq de servicios, controllers, etc
+    - Deinificón de tests
+    - Creación de API
+    - Documentación de la API
+    - Implementación de Redis para stats
+    - Creación de Repo y de branching
+    - Pipelines de github para test
+    - Integracion de DB y Redis
+
+
+

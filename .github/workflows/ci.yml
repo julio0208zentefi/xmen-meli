@@ -1,0 +1,12 @@
+name: Build and Test
+on: ["push"]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: tests
+        working-directory: /home/runner/work/xmen/xmen/api
+        run: |
+          npm install; 
+          npm run test

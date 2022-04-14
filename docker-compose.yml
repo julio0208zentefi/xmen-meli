@@ -1,0 +1,40 @@
+version: "2.1"
+
+services:
+
+  db:
+    image: "cassandra:3"
+    ports:
+      - "9042:9042"
+    volumes:
+      - ./.data/cassandra:/var/lib/cassandra:rw
+    environment:
+      - "MAX_HEAP_SIZE=256M"
+      - "HEAP_NEWSIZE=128M"
+    restart: always
+    healthcheck:
+      test: [ "CMD", "cqlsh", "-u cassandra", "-p cassandra" ,"-e describe keyspaces" ]
+      interval: 2s
+      timeout: 10s
+      retries: 20
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+
+  api:
+    build: ./api
+    image: xmen-api
+    env_file:
+      - ./api/.env
+    ports:
+      - "80:80"
+    volumes:
+      - ./api:/usr/src/api-app:rw
+    depends_on:
+      redis:
+        condition: "service_started"
+      db:
+        condition: "service_healthy"
+

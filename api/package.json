@@ -1,0 +1,32 @@
+{
+  "name": "Meli-XMen",
+  "version": "1.0.0",
+  "description": "Xmen Test for Meli",
+  "author": "Julito Ojeda <julito0208@gmail.com>",
+  "main": "app/server.js",
+  "dependencies": {
+    "amqplib": "^0.8.0",
+    "axios": "0.22.0",
+    "body-parser": "1.19.0",
+    "cassandra-driver": "^4.6.3",
+    "cors": "^2.8.5",
+    "docker-secret": "1.2.4",
+    "dotenv": "^16.0.0",
+    "ember-composable-helpers": "2.4.0",
+    "express": "^4.16.1",
+    "express-cassandra": "^2.8.0",
+    "express-handlebars": "5.3.3",
+    "jest": "^27.5.1",
+    "node-gyp-build": "^4.4.0",
+    "nodemon": "^2.0.13",
+    "redis": "^4.0.6",
+    "sequelize": "6.6.5",
+    "swagger-jsdoc": "^6.2.0",
+    "swagger-ui-express": "^4.3.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest",
+    "start-watch": "nodemon --exec 'npm start'"
+  }
+}
