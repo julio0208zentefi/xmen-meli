@@ -114,3 +114,8 @@ millón de peticiones por segundo).</p>
 - Instrucciones de cómo ejecutar el programa o la API. (Para Nivel 2 y 3: En README de
 github).
 - URL de la API (Nivel 2 y 3)
+
+<h2><u>Solución</u></h2>
+
+- Stack: NodeJS / Cassandra / Redis
+- API: <a href="#">API Definition</a>
