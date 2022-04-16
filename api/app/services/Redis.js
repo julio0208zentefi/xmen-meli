@@ -1,6 +1,6 @@
 require('redis')
 
-const Redis = {}
+const Redis = {};
 
 // Primitive Methods
 Redis.setItem = async function (key, value) {
