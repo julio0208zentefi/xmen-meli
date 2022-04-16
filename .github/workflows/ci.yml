@@ -18,4 +18,4 @@ jobs:
         working-directory: /home/runner/work/xmen-meli/xmen-meli/api
         run: |
           npm install;
-          ./node_modules/.bin/eslint eslint .
+          ./node_modules/.bin/eslint .
