@@ -10,6 +10,7 @@ Steps:
     - Pipelines de github para test
     - Integracion de DB y Redis
     - Update readme.md
+    - Integración ESLint
 
 
 

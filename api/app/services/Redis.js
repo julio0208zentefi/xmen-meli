@@ -1,60 +1,53 @@
-const redis = require("redis");
+require('redis')
 
-let Redis = {};
+const Redis = {}
 
 // Primitive Methods
-Redis.setItem = async function(key, value) {
+Redis.setItem = async function (key, value) {
+  const redis = require('redis')
 
-    const redis = require('redis')
+  const client = await redis.createClient({
+    url: process.env.REDIS_URL
+  })
 
-    let client = await redis.createClient({
-        url: process.env.REDIS_URL
-    });
+  await client.connect()
+  await client.set(key, value)
+}
 
-    await client.connect();
-    await client.set(key, value);
+Redis.getItem = async function (key, defaultValue) {
+  const redis = require('redis')
 
-};
+  const client = await redis.createClient({
+    url: process.env.REDIS_URL
+  })
 
-Redis.getItem = async function(key, defaultValue) {
+  await client.connect()
+  let value = await client.get(key)
 
-    const redis = require('redis')
+  if (value === null) {
+    value = defaultValue
+  }
 
-    let client = await redis.createClient({
-        url: process.env.REDIS_URL
-    });
-
-    await client.connect();
-    let value = await client.get(key);
-
-    if(value === null) {
-        value = defaultValue;
-    }
-
-    return value;
-};
+  return value
+}
 
 // JSON Methods
-Redis.setJSON = async function(key, value) {
+Redis.setJSON = async function (key, value) {
+  const json = JSON.stringify(value)
+  return await Redis.setItem(key, json)
+}
 
-    let json = JSON.stringify(value);
-    return await Redis.setItem(key, json);
+Redis.getJSON = async function (key, defaultValue) {
+  let value = await Redis.getItem(key)
 
-};
+  if (!value) {
+    value = defaultValue
+  } else {
+    value = JSON.parse(value)
+  }
+  return value
+}
 
-Redis.getJSON = async function(key, defaultValue) {
+// -------------------------------------------
 
-    let value = await Redis.getItem(key);
-
-    if(!value) {
-        value = defaultValue;
-    } else {
-        value = JSON.parse(value);
-    }
-    return value;
-
-};
-
-//-------------------------------------------
-
-module.exports = Redis;
+module.exports = Redis

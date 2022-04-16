@@ -10,3 +10,11 @@ jobs:
         run: |
           npm install; 
           npm run test
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+       - uses: actions/checkout@v1
+       - name: tests
+       working-directory: /home/runner/work/xmen-meli/xmen-meli/api
+       run: |
+          eslint -- --ext .jsx,.js src/
