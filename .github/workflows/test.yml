@@ -1,0 +1,22 @@
+name: Test & Style
+on: ["push"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Tests
+        working-directory: /home/runner/work/xmen-meli/xmen-meli/api
+        run: |
+          npm install;
+          npm run test
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Eslint
+        working-directory: /home/runner/work/xmen-meli/xmen-meli/api
+        run: |
+          npm install;
+          ./node_modules/.bin/eslint .
