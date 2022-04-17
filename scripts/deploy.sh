@@ -23,3 +23,9 @@ npm i dotenv;
 cd ..;
 
 docker-compose up -d;
+
+cd api;
+npm i dotenv;
+cd ..;
+
+docker-compose up -d;
