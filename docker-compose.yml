@@ -8,6 +8,8 @@ services:
       - "9042:9042"
     volumes:
       - ./.data/cassandra:/var/lib/cassandra:rw
+      - ./db/docker-entrypoint.sh:/docker-entrypoint.sh
+      - ./db/docker-entrypoint-cqlsh:/docker-entrypoint-cqlsh
     environment:
       - "MAX_HEAP_SIZE=256M"
       - "HEAP_NEWSIZE=128M"

@@ -29,7 +29,9 @@
   "scripts": {
     "start": "node app.js",
     "test": "jest",
-    "start-watch": "nodemon --exec 'npm start'"
+    "start-watch": "nodemon --exec 'npm start'",
+    "eslint-check": "./node_modules/.bin/eslint .",
+    "eslint-fix": "./node_modules/.bin/eslint . --fix"
   }
 
 }

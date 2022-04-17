@@ -2,7 +2,7 @@
 
 require('express')
 const redisClient = require('../../config/redis')
-const REDIS_KEY = process.env.REDIS_STATS_KEY;
+const REDIS_KEY = process.env.REDIS_STATS_KEY
 
 const DNAMatrix = []
 
@@ -130,16 +130,15 @@ DNAMatrix.isMutantDNAMatrix = function (dnaMatrix) {
 
 // -------------------------------------------
 
-DNAMatrix.getStats = async function() {
-
+DNAMatrix.getStats = async function () {
   const client = redisClient()
   let stats = await client.get(REDIS_KEY)
 
   if (stats === null) {
     stats = {
-        'count_mutant_dna': 0,
-        'count_human_dna': 0,
-        'ratio': 0
+      count_mutant_dna: 0,
+      count_human_dna: 0,
+      ratio: 0
     }
   } else {
     stats = JSON.parse(stats)
@@ -148,18 +147,13 @@ DNAMatrix.getStats = async function() {
   return stats
 }
 
-DNAMatrix.updateStats = async function(isMutant) {
+DNAMatrix.updateStats = async function (mutansCount, humansCount) {
+  const stats = await DNAMatrix.getStats()
+  stats.count_mutant_dna = mutansCount
+  stats.count_human_dna = humansCount
 
-  let stats = await DNAMatrix.getStats();
-
-  if(isMutant) {
-    stats['count_mutant_dna']++
-  } else {
-    stats['count_human_dna']++;
-  }
-
-  let totalTests = stats['count_human_dna'] + stats['count_mutant_dna']
-  stats['ratio'] = (totalTests > 0) ? stats['count_mutant_dna'] / totalTests : 0;
+  const totalTests = stats.count_human_dna + stats.count_mutant_dna
+  stats.ratio = (totalTests > 0) ? stats.count_mutant_dna / totalTests : 0
 
   const client = redisClient()
   await client.set(REDIS_KEY, JSON.stringify(stats))
