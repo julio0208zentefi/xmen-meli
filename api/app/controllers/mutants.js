@@ -1,8 +1,5 @@
 const DNAMatrixService = require('../services/DNAMatrix')
-const Redis = require('../services/Redis')
 const DNAMatrixModel = require('../models/DNAMatrixModel')
-
-const REDIS_KEY = process.env.REDIS_STATS_KEY;
 
 const isMutant = async function(req, res) {
 
@@ -31,22 +28,7 @@ const isMutant = async function(req, res) {
 
     dnaMatrixModel.save();
 
-    let stats = await Redis.getJSON(REDIS_KEY, {
-        'count_mutant_dna': 0,
-        'count_human_dna': 0,
-        'ratio': 0
-    });
-
-    if(isMutant) {
-        stats['count_mutant_dna']++;
-    } else {
-        stats['count_human_dna']++;
-    }
-
-    let totalTests = stats['count_human_dna'] + stats['count_mutant_dna']
-    stats['ratio'] = (totalTests > 0) ? stats['count_mutant_dna'] / totalTests : 0;
-
-    await Redis.setJSON(REDIS_KEY, stats);
+    await DNAMatrixService.updateStats(isMutant)
 
     if(isMutant) {
         res.send({
@@ -62,11 +44,7 @@ const isMutant = async function(req, res) {
 
 const stats = async function(req, res) {
 
-    let stats = await Redis.getJSON(REDIS_KEY, {
-        'count_mutant_dna': 0,
-        'count_human_dna': 0,
-        'ratio': 0
-    });
+    let stats = await DNAMatrixService.getStats()
 
     res.send(stats, 200);
 }

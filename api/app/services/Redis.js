@@ -1,27 +1,17 @@
 require('redis')
+const redisClient = require('../../config/redis')
 
 const Redis = {}
 
 // Primitive Methods
 Redis.setItem = async function (key, value) {
-  const redis = require('redis')
 
-  const client = await redis.createClient({
-    url: process.env.REDIS_URL
-  })
-
-  await client.connect()
+  const client = redisClient()
   await client.set(key, value)
 }
 
 Redis.getItem = async function (key, defaultValue) {
-  const redis = require('redis')
-
-  const client = await redis.createClient({
-    url: process.env.REDIS_URL
-  })
-
-  await client.connect()
+  const client = redisClient()
   let value = await client.get(key)
 
   if (value === null) {

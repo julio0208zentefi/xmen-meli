@@ -1,6 +1,9 @@
 'use strict'
 
 require('express')
+const redisClient = require('../../config/redis')
+const REDIS_KEY = process.env.REDIS_STATS_KEY;
+
 const DNAMatrix = []
 
 // Constants
@@ -123,6 +126,43 @@ DNAMatrix.isMutantDNAMatrix = function (dnaMatrix) {
   const mutantSequences = this.filterMutantDNASequences(sequences)
 
   return mutantSequences.length >= DNAMatrix.MUTANT_SEQUENCES_MIN_OCURRENCES
+}
+
+// -------------------------------------------
+
+DNAMatrix.getStats = async function() {
+
+  const client = redisClient()
+  let stats = await client.get(REDIS_KEY)
+
+  if (stats === null) {
+    stats = {
+        'count_mutant_dna': 0,
+        'count_human_dna': 0,
+        'ratio': 0
+    }
+  } else {
+    stats = JSON.parse(stats)
+  }
+
+  return stats
+}
+
+DNAMatrix.updateStats = async function(isMutant) {
+
+  let stats = await DNAMatrix.getStats();
+
+  if(isMutant) {
+    stats['count_mutant_dna']++
+  } else {
+    stats['count_human_dna']++;
+  }
+
+  let totalTests = stats['count_human_dna'] + stats['count_mutant_dna']
+  stats['ratio'] = (totalTests > 0) ? stats['count_mutant_dna'] / totalTests : 0;
+
+  const client = redisClient()
+  await client.set(REDIS_KEY, JSON.stringify(stats))
 }
 
 // -------------------------------------------
