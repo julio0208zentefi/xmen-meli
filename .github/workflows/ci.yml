@@ -23,7 +23,8 @@ jobs:
 
   deploy:
 
-    if: 'github.ref == "refs/heads/master"'
+    only:
+      - if: 'github.ref == "refs/heads/master"'
 
     runs-on: ubuntu-latest
 
