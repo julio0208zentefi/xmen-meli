@@ -21,10 +21,7 @@ app.get('/api-docs.json', (req, res) => {
 })
 
 // Routes -------------------------------------------------------------------
-app.use('/', require('./app/routes/mutants'))
-
-// Cassandra -------------------------------------------------------------------
-// const DBConnection = require('./config/cassandra');
+require('./app/routes')(app)
 
 // Server listen -------------------------------------------------------------------
 app.listen(process.env.HTTP_PORT, process.env.HTTP_LISTEN)

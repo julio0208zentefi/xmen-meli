@@ -117,6 +117,8 @@ github).
 
 <h2><u>Solución</u></h2>
 
+<p>URL productiva: <a>URL</a></p>
+
 <h4> Se creó un stack con: </h4>
 
 - API: NodeJS + Express
@@ -133,3 +135,42 @@ github).
 - OAuth2 for API Authentication
 - JMeter for stress testing
 
+<h4> Uso de la API </h4>
+
+<p>Swagger de la API: <a>Link</a></p>
+
+<h5>Autenticación OAuth2:</h5>
+
+<p>Para usar los endpoints de la API, debe obtener un token de sesión, haciendo un request hacia:</p>
+
+<p><b>/oauth/token</b></p>
+
+Con las siguientes credenciales: 
+
+- <b>grant_type</b>: password
+- <b>username</b>: username
+- <b>password</b>: password
+- <b>client_id</b>: client
+- <b>client_secret</b>: secret
+
+<p>Se obtendrá un json similar: </p>
+
+<code>
+{
+    "token_type": "bearer",
+    "access_token": "<b>0b1ef7ad5d775cd7d32d63813a18c3e48751fb7b</b>",
+    "expires_in": 3600,
+    "refresh_token": "c0558508f92663b02e05eaccb03792e1e7390c8e"
+}
+</code>
+
+El access token obtenido, deberá ser usado para las llamadas a la API como un parámetro dentro del header como:
+
+<code>
+Authorization: Bearer <b>0b1ef7ad5d775cd7d32d63813a18c3e48751fb7b</b>
+</code>
+
+
+<br />
+<br />
+<br />

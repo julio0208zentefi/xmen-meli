@@ -130,33 +130,35 @@ DNAMatrix.isMutantDNAMatrix = function (dnaMatrix) {
 
 // -------------------------------------------
 
-DNAMatrix.getStats = async function () {
+DNAMatrix.getStats = async function (callback) {
   const client = redisClient()
-  let stats = await client.get(REDIS_KEY)
 
-  if (stats === null) {
-    stats = {
-      count_mutant_dna: 0,
-      count_human_dna: 0,
-      ratio: 0
+  return await client.get(REDIS_KEY, function (err, stats) {
+    if (err || !stats) {
+      stats = {
+        count_mutant_dna: 0,
+        count_human_dna: 0,
+        ratio: 0
+      }
+    } else {
+      stats = JSON.parse(stats)
     }
-  } else {
-    stats = JSON.parse(stats)
-  }
 
-  return stats
+    callback.call(this, stats)
+  })
 }
 
 DNAMatrix.updateStats = async function (mutansCount, humansCount) {
-  const stats = await DNAMatrix.getStats()
-  stats.count_mutant_dna = mutansCount
-  stats.count_human_dna = humansCount
+  await DNAMatrix.getStats(function (stats) {
+    stats.count_mutant_dna = mutansCount
+    stats.count_human_dna = humansCount
 
-  const totalTests = stats.count_human_dna + stats.count_mutant_dna
-  stats.ratio = (totalTests > 0) ? stats.count_mutant_dna / totalTests : 0
+    const totalTests = stats.count_human_dna + stats.count_mutant_dna
+    stats.ratio = (totalTests > 0) ? stats.count_mutant_dna / totalTests : 0
 
-  const client = redisClient()
-  await client.set(REDIS_KEY, JSON.stringify(stats))
+    const client = redisClient()
+    client.set(REDIS_KEY, JSON.stringify(stats))
+  })
 }
 
 // -------------------------------------------
