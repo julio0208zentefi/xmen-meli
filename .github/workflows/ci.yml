@@ -1,9 +1,7 @@
 name: Build and Test
 on: ["push"]
 jobs:
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-      when: manual
+
 #  test:
 #    runs-on: ubuntu-latest
 #    steps:
@@ -24,10 +22,14 @@ jobs:
 #          ./node_modules/.bin/eslint .
 
   deploy:
+
     runs-on: ubuntu-latest
 
     steps:
       - name: Test
+      - rules:
+          - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+            when: manual
         uses: actions/checkout@v1
         run: |
           ls .
