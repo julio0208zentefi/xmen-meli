@@ -35,7 +35,7 @@ jobs:
         KEY: ${{ secrets.SSHKEY }}
       with:
         source: "."
-        target: "/xmen-api"
+        target: "/xmen-meli"
 
     - name: Executing remote command
       uses: appleboy/ssh-action@master
@@ -44,4 +44,4 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-        script: ls
+        script: /xmen-meli/scripts/deploy.sh
