@@ -117,5 +117,19 @@ github).
 
 <h2><u>Solución</u></h2>
 
-- Stack: NodeJS / Cassandra / Redis
-- API: <a href="#">API Definition</a>
+<h4> Se creó un stack con: </h4>
+
+- API: NodeJS + Express
+- DB: Apache Cassandra
+- ESlint for code analyzing & styling
+- Jest for unit testing
+- Redis for Cache
+- Hosted by Google Cloud services 
+
+<h4> Otras herramientas </h4>
+
+- GitHub CI/CD for running Tests & Eslint
+- Swagger for API Documentation
+- OAuth2 for API Authentication
+- JMeter for stress testing
+

@@ -6,7 +6,6 @@
   "main": "app/server.js",
   "dependencies": {
     "amqplib": "^0.8.0",
-    "axios": "0.22.0",
     "body-parser": "1.19.0",
     "cassandra-driver": "^4.6.3",
     "cors": "^2.8.5",
@@ -20,7 +19,6 @@
     "node-gyp-build": "^4.4.0",
     "nodemon": "^2.0.13",
     "redis": "^4.0.6",
-    "sequelize": "6.6.5",
     "swagger-jsdoc": "^6.2.0",
     "swagger-ui-express": "^4.3.0",
     "eslint": "^7.32.0",
