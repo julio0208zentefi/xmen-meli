@@ -18,4 +18,8 @@ docker-compose rm -f;
 
 docker-compose build;
 
+cd api;
+npm i dotenv;
+cd ..;
+
 docker-compose up -d;
