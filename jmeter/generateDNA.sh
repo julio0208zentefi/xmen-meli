@@ -3,7 +3,7 @@
 DNA_LETTERS=("A" "T" "C" "G")
 DNA_LINE_LENGTH=6
 DATA_FILE="data.csv"
-DATA_LINES=300
+DATA_LINES=900
 
 function generateLetter {
 
