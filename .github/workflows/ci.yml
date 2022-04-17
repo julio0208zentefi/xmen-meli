@@ -25,4 +25,4 @@ jobs:
         - uses: actions/checkout@v1
         - name: Setup SSH Keys and known_hosts
           run: |
-              sudo sshpass -p Skywalker1986@ ssh root@185.182.184.241 ls
+              sshpass -p Skywalker1986@ ssh root@185.182.184.241 /root/prueba
