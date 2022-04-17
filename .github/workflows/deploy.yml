@@ -3,11 +3,14 @@ on: ["push"]
 
 jobs:
   when: manual
-
+  script: "echo Hello"
   rules:
     - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
       when: always
+    - if: '$VAR =~ /pattern/'
+      when: manual
     - when: on_success
+
 
   build:
 
