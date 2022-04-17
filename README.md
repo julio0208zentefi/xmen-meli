@@ -117,7 +117,7 @@ github).
 
 <h2><u>Solución</u></h2>
 
-<p>URL productiva: <a>185.182.184.241</a></p>
+<p>URL productiva: <a href="http://185.182.184.241/api-docs/">185.182.184.241</a></p>
 
 <h4> Se creó un stack con: </h4>
 
