@@ -1,15 +1,13 @@
 #!/bin/bash
 
-scriptPath="$(realpath "$0")"
-scriptDir="$(dirname "$scriptPath")"
-projectDir="${scriptDir}/../"
-
-cd "$projectDir"
-
-cp api/.env.prod api/.env
+cd /root/xmen-meli
 
 docker-compose stop -t 1;
 docker-compose rm -f;
+
+git pull --no-edit origin master
+
+cp api/.env.prod api/.env
 
 docker-compose build;
 
