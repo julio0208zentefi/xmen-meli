@@ -11,6 +11,8 @@ git fetch
 git checkout master
 git pull
 
+cp api/.env.prod api/.env
+
 docker-compose stop -t 1;
 docker-compose rm -f;
 
