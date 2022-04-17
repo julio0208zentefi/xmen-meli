@@ -5,4 +5,5 @@ COPY . .
 RUN npm install
 
 EXPOSE 443
+EXPOSE 80
 CMD [ "/start.sh" ]
