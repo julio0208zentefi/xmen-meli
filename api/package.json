@@ -27,9 +27,9 @@
     "eslint-plugin-promise": "^5.2.0"
   },
   "scripts": {
-    "start": "node app.js",
+    "start-app": "node app.js",
+    "start-app-watch": "nodemon --exec 'npm run start-app'",
     "test": "jest",
-    "start-watch": "nodemon --exec 'npm start'",
     "eslint-check": "./node_modules/.bin/eslint .",
     "eslint-fix": "./node_modules/.bin/eslint . --fix"
   }
