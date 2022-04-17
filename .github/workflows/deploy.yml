@@ -3,8 +3,6 @@ on: ["push"]
 jobs:
   rules:
     - "if=$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == 'master'"
-      when: always
-    - when: on_success
   build:
     runs-on: ubuntu-latest
     steps:
