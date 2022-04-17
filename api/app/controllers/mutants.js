@@ -42,9 +42,10 @@ const isMutant = async function (req, res) {
 }
 
 const stats = async function (req, res) {
-  const stats = await DNAMatrixService.getStats()
+  await DNAMatrixService.getStats(function(stats) {
+    res.send(stats, 200);
+  })
 
-  res.send(stats, 200)
 }
 
 module.exports = { isMutant, stats }

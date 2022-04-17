@@ -24,7 +24,11 @@ services:
       retries: 100
 
   redis:
-    image: "redis:alpine"
+    image: "redis:3"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./.data/redis:/bitnami/redis/data
     ports:
       - "6379:6379"
 

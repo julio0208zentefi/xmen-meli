@@ -1,8 +1,9 @@
-const express = require('express')
-const router = express.Router()
-const MutantsController = require('../controllers/mutants')
+module.exports = function(app, router) {
 
-router.post('/mutant', MutantsController.isMutant)
-router.get('/stats', MutantsController.stats)
+    const MutantsController = require('../controllers/mutants')
 
-module.exports = router
+    app.post('/mutant', app.oauth.authorise(), MutantsController.isMutant)
+    app.get('/stats', app.oauth.authorise(), MutantsController.stats)
+
+    return router;
+}
