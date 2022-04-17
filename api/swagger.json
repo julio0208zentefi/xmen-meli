@@ -11,18 +11,89 @@
     "basePath": "/",
     "tags": [
         {
+            "name": "OAuth2",
+            "description": "Authorization"
+        },
+        {
             "name": "Mutants",
             "description": "Operations about mutants"
         }
     ],
+    "securityDefinitions": {
+        "Bearer": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header",
+            "description": "For accessing the API a valid JWT token must be passed in all the queries in the 'Authorization' header."
+        }
+    },
     "paths": {
+        "/oauth/token": {
+            "post": {
+                "tags": [
+                    "OAuth2"
+                ],
+                "summary": "Generate a token",
+                "consumes":["application/x-www-form-urlencoded"],
+                "parameters": [
+                    {
+                        "in": "formData",
+                        "name": "username",
+                        "default": "username",
+                        "required": true
+                    },
+                    {
+                        "in": "formData",
+                        "name": "password",
+                        "required": true,
+                        "default": "password"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "client_id",
+                        "required": true,
+                        "default": "client"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "client_secret",
+                        "required": true,
+                        "default": "secret"
+                    },
+                    {
+                        "in": "formData",
+                        "name": "grant_type",
+                        "required": true,
+                        "default": "password"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The token is generated"
+                    }
+                }
+            }
+        },
         "/mutant": {
             "post": {
                 "tags": [
                     "Mutants"
                 ],
+                "security": [
+                    {"Bearer": ["Authorization"]}
+                ],
                 "summary": "Check if a matrix dna is for a mutant or a human.",
                 "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer token",
+                        "required": true,
+                        "example": "Bearer ",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
                     {
                         "in": "body",
                         "name": "DNAMatrix",
@@ -50,6 +121,21 @@
             "get": {
                 "tags": [
                     "Mutants"
+                ],
+                "security": [
+                    {"Bearer":  []}
+                ],
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "Authorization",
+                        "description": "Bearer token",
+                        "required": true,
+                        "example": "Bearer ",
+                        "schema": {
+                            "type": "Authorization"
+                        }
+                    }
                 ],
                 "summary": "Get dna checks stats",
                 "responses": {
