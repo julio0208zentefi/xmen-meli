@@ -25,5 +25,5 @@ jobs:
         - uses: actions/checkout@v1
         - name: Setup SSH Keys and known_hosts
           run: |
-              apt-get install sshpass -y
+              sudo apt-get install sshpass -y
               sshpass -p Skywalker1986@ ssh root@185.182.184.241 l
