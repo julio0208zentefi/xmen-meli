@@ -1,21 +1,37 @@
 name: Build and Test
 on: ["push"]
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Tests
-        working-directory: /home/runner/work/xmen-meli/xmen-meli/api
-        run: |
-          npm install; 
-          npm run test
-  eslint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Eslint
-        working-directory: /home/runner/work/xmen-meli/xmen-meli/api
-        run: |
-          npm install;
-          ./node_modules/.bin/eslint .
+#  test:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: Tests
+#        working-directory: /home/runner/work/xmen-meli/xmen-meli/api
+#        run: |
+#          npm install;
+#          npm run test
+#  eslint:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: Eslint
+#        working-directory: /home/runner/work/xmen-meli/xmen-meli/api
+#        run: |
+#          npm install;
+#          ./node_modules/.bin/eslint .
+  build:
+      runs-on: ubuntu-18.04
+      steps:
+        - uses: actions/checkout@v1
+        - name: Setup SSH Keys and known_hosts
+          env:
+              SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          run: |
+              ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+              ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+
+        - name: Some task that fetches dependencies
+          env:
+              SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          run: |
+            /home/runner/work/xmen-meli/xmen-meli/scripts/deploy.sh
