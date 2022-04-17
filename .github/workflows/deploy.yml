@@ -1,0 +1,11 @@
+name: Build and Test
+on: ["push"]
+
+jobs:
+  script: "echo Hello, Rules!"
+  rules:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
+      when: always
+    - if: '$VAR =~ /pattern/'
+      when: manual
+    - when: on_success
