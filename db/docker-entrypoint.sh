@@ -95,9 +95,21 @@ fi
 
 # Exec init cql ----------------------------------------------------------------------------------------------------
 
-for cql_file in /docker-entrypoint-cqlsh/*.cql; do
-  cqlsh -f "${cql_file}" &
-done;
+INIT_DIR=docker-entrypoint-cqlsh
+# this whole block will execute in the background
+(
+    cd $INIT_DIR
+    # wait for cassandra to be ready
+    while ! cqlsh -e 'describe cluster' > /dev/null 2>&1; do sleep 6; done
+    echo "$0: Cassandra cluster ready: executing cql scripts found in $INIT_DIR"
+    # find and execute cql scripts, in name order
+    for f in $(find . -type f -name "*.cql" -print | sort); do
+        echo "$0: running $f"
+        cqlsh -f "$f"
+        echo "$0: $f executed"
+    done
+) &
 
-# Exe everything else
+# Exe everything else ---------------------------------------------------------------------
 exec "$@"
+

@@ -13,12 +13,15 @@ services:
     environment:
       - "MAX_HEAP_SIZE=256M"
       - "HEAP_NEWSIZE=128M"
+      - CASSANDRA_USER=cassandra
+      - CASSANDRA_PASSWORD=cassandra
+      - CASSANDRA_DATACENTER=datacenter1
     restart: always
     healthcheck:
       test: [ "CMD", "cqlsh", "-u cassandra", "-p cassandra" ,"-e describe keyspaces" ]
-      interval: 2s
+      interval: 10s
       timeout: 10s
-      retries: 20
+      retries: 100
 
   redis:
     image: "redis:alpine"
