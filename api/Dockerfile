@@ -4,5 +4,5 @@ WORKDIR /usr/src/api-app
 COPY . .
 RUN npm install
 
-EXPOSE 80
+EXPOSE 443
 CMD [ "/start.sh" ]

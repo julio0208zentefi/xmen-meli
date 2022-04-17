@@ -39,6 +39,7 @@ services:
       - ./api/.env
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./api:/usr/src/api-app:rw
       - ./api/start.sh:/start.sh
