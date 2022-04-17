@@ -2,7 +2,8 @@ name: Build and Test
 on: ["push"]
 
 jobs:
-  script: "echo Hello, Rules!"
+  when: manual
+  script: "echo Hello"
   rules:
     - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
       when: always

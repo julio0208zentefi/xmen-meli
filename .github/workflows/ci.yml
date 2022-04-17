@@ -2,10 +2,6 @@ name: Build and Test
 on: ["push"]
 
 jobs:
-  rules:
-    - if: 'github.ref == "refs/heads/master"'
-      when: always
-    - when: on_success
 #  test:
 #    runs-on: ubuntu-latest
 #    steps:
