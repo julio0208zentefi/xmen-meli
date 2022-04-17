@@ -3,7 +3,8 @@ on: ["push"]
 
 jobs:
   rules:
-    - if: 'github.ref == "refs/heads/master"'
+    - if: ('github.ref == "refs/heads/master"')
+      when: never
 #  test:
 #    runs-on: ubuntu-latest
 #    steps:
