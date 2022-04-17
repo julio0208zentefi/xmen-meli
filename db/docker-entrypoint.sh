@@ -96,8 +96,7 @@ fi
 # Exec init cql ----------------------------------------------------------------------------------------------------
 
 for cql_file in /docker-entrypoint-cqlsh/*.cql; do
-  echo "Exec ${cql_file}"
-  cqlsh -f "${cql_file}"
+  cqlsh -f "${cql_file}" &
 done;
 
 # Exe everything else
