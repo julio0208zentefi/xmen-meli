@@ -1,19 +1,14 @@
 name: Deploy
 on: ["push"]
-
 jobs:
   rules:
     - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
       when: always
     - when: on_success
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
-
     - name: Executing remote command
       uses: appleboy/ssh-action@master
       with:
