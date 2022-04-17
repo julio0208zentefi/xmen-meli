@@ -1,7 +1,9 @@
 name: Build and Test
 on: ["push"]
-jobs:
 
+jobs:
+  rules:
+    - if: 'github.ref == "refs/heads/master"'
 #  test:
 #    runs-on: ubuntu-latest
 #    steps:
@@ -25,8 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-        only:
-          - if: 'github.ref == "refs/heads/master"'
+
         run: |
           ls .
 
