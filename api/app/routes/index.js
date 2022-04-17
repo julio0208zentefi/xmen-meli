@@ -1,10 +1,8 @@
-const express = require("express");
-const MutantsController = require("../controllers/mutants");
+const express = require('express')
 
-module.exports = function(app) {
+module.exports = function (app) {
+  const router = express.Router()
 
-    const router = express.Router()
-
-    require('./oauth2')(app, router)
-    require('./mutants')(app, router)
+  require('./oauth2')(app, router)
+  require('./mutants')(app, router)
 }

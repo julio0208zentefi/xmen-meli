@@ -131,11 +131,9 @@ DNAMatrix.isMutantDNAMatrix = function (dnaMatrix) {
 // -------------------------------------------
 
 DNAMatrix.getStats = async function (callback) {
-
   const client = redisClient()
 
-  return await client.get(REDIS_KEY, function(err, stats) {
-
+  return await client.get(REDIS_KEY, function (err, stats) {
     if (err || !stats) {
       stats = {
         count_mutant_dna: 0,
@@ -146,15 +144,12 @@ DNAMatrix.getStats = async function (callback) {
       stats = JSON.parse(stats)
     }
 
-    callback.call(this, stats);
+    callback.call(this, stats)
   })
-
-
 }
 
 DNAMatrix.updateStats = async function (mutansCount, humansCount) {
-
-  await DNAMatrix.getStats(function(stats) {
+  await DNAMatrix.getStats(function (stats) {
     stats.count_mutant_dna = mutansCount
     stats.count_human_dna = humansCount
 
@@ -164,7 +159,6 @@ DNAMatrix.updateStats = async function (mutansCount, humansCount) {
     const client = redisClient()
     client.set(REDIS_KEY, JSON.stringify(stats))
   })
-
 }
 
 // -------------------------------------------
