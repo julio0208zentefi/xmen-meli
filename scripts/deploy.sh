@@ -1,10 +1,6 @@
 #!/bin/bash
 
-scriptPath="$(realpath "$0")"
-scriptDir="$(dirname "$scriptPath")"
-projectDir="${scriptDir}/../"
-
-cd "$projectDir"
+cd /root/xmen-meli
 
 cp api/.env.prod api/.env
 
