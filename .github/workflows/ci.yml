@@ -3,8 +3,9 @@ on: ["push"]
 
 jobs:
   rules:
-    - if: ('github.ref == "refs/heads/master"')
-      when: never
+    - if: 'github.ref == "refs/heads/master"'
+      when: always
+    - when: on_success
 #  test:
 #    runs-on: ubuntu-latest
 #    steps:
@@ -28,7 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test
-
         run: |
           ls .
 
