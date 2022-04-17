@@ -1,21 +1,47 @@
 name: Build and Test
 on: ["push"]
 jobs:
-  test:
+#  test:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: Tests
+#        working-directory: /home/runner/work/xmen-meli/xmen-meli/api
+#        run: |
+#          npm install;
+#          npm run test
+#  eslint:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: Eslint
+#        working-directory: /home/runner/work/xmen-meli/xmen-meli/api
+#        run: |
+#          npm install;
+#          ./node_modules/.bin/eslint .
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v1
-      - name: Tests
-        working-directory: /home/runner/work/xmen-meli/xmen-meli/api
-        run: |
-          npm install; 
-          npm run test
-  eslint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v1
-      - name: Eslint
-        working-directory: /home/runner/work/xmen-meli/xmen-meli/api
-        run: |
-          npm install;
-          ./node_modules/.bin/eslint .
+    - uses: actions/checkout@v1
+
+    - name: Copy repository contents via scp
+      uses: appleboy/scp-action@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
+      with:
+        source: "."
+        target: "/xmen-meli"
+
+    - name: Executing remote command
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
+        script: /xmen-meli/scripts/deploy.sh
