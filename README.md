@@ -137,7 +137,7 @@ github).
 
 <h4> Uso de la API </h4>
 
-<p>Swagger de la API: <a>Link</a></p>
+<p>Swagger de la API: <a href="http://185.182.184.241/api-docs/">http://185.182.184.241/api-docs/</a></p>
 
 <h5>Autenticación OAuth2:</h5>
 
