@@ -85,16 +85,6 @@
                 "summary": "Check if a matrix dna is for a mutant or a human.",
                 "parameters": [
                     {
-                        "in": "header",
-                        "name": "Authorization",
-                        "description": "Bearer token",
-                        "required": true,
-                        "example": "Bearer ",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
                         "in": "body",
                         "name": "DNAMatrix",
                         "description": "DNA Matrix",
@@ -124,18 +114,6 @@
                 ],
                 "security": [
                     {"Bearer":  []}
-                ],
-                "parameters": [
-                    {
-                        "in": "header",
-                        "name": "Authorization",
-                        "description": "Bearer token",
-                        "required": true,
-                        "example": "Bearer ",
-                        "schema": {
-                            "type": "Authorization"
-                        }
-                    }
                 ],
                 "summary": "Get dna checks stats",
                 "responses": {
